@@ -174,28 +174,6 @@ class SiteController extends Controller
                 ]
             );
     }
-    public function actionComments()
-    {
-        $comments = Comments::find();
-
-        $pagination = new Pagination([
-            'defaultPageSize' => 2,
-            'totalCount'=>$comments->count()
-            ]);
-
-        $comments = $comments
-        ->offset($pagination->offset)
-        ->limit($pagination->limit)
-        ->all();
-
-        $cookies = Yii::$app->request->cookies;
-
-        return $this->render('comments', [
-            'comments' => $comments,
-            'pagination'=>$pagination,
-            'name' => $cookies->getValue('name')
-            ]);
-    }
 
     public function actionComment($id)
     {
